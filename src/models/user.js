@@ -1,6 +1,7 @@
 const mongoose =require('mongoose')
 const validator =require('validator')
 
+// this is the model for user
 const User =mongoose.model('User',
 {
     name: {

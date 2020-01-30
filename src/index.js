@@ -1,50 +1,28 @@
+// this is main file of server
+// we have distributed overhead in model files
+// and finall use that router in this file
+
 const express =require('express')
 require('./db/Mongoose.js')
-
-// the database moedule is loaded which is used to create object and store in db
-const User =require('./models/user.js')
-const Task=require('./models/task.js')
-
 const app=express()
-
 // the data coming in the request is parsed as json
 app.use(express.json())
+
+
+
+// we are importing the router from each file
+const user_router =require('./routes/user_routes.js')
+const task_router=require('./routes/task_router.js')
+
+// by this comnd it will use that router
+app.use(user_router)
+app.use(task_router)
+
+
 
 app.listen(3000,()=>
 {
     console.log('listning no port 3000')
 })
 
-// this is post request user /user url
-app.post('/user',(req,res)=>
-{
-console.log(req.body)
 
-// object for user created now it will be stored into database
-var user =new User(req.body)
-
-        user.save().then(()=>
-        {
-        res.send('user registered successfully')
-        }).catch((e)=>
-        {
-        res.send(e)
-        })
-
-})
-
-// post request to send data under url /task
-app.post('/task',(req,res)=>
-{
-    var task=new Task(req.body)
-
-console.log(task)
-    task.save().then(()=>
-        {
-        res.send('task saved successfully')
-        }).catch((e)=>
-        {
-        res.send(e)
-        })
-
-})
