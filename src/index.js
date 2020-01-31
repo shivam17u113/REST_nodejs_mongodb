@@ -24,5 +24,14 @@ app.listen(3000,()=>
 {
     console.log('listning no port 3000')
 })
+const bcrypt= require('bcryptjs')
 
+const myFun =async()=>
+{
+    const pass='12345'
+    const hashPass =await bcrypt.hash(pass,8)
+
+    console.log(pass)
+    console.log(hashPass)
+}
 
