@@ -8,7 +8,7 @@ router.post('/user', async(req,res)=>
 {
 console.log(req.body)           
 
-// object for user created now it will be stored into database     
+//object for user created now it will be stored into database     
 var user =new User(req.body)
 
 try{
@@ -33,12 +33,9 @@ router.post('/user/login',async(req,res)=>{
 
 try {
         const user =await User.findCredetials(req.body.email,req.body.password)
-
         // here we have defined our own method to generate the token
         const token =await user.tokenGenrator()
         console.log('user from try ',token)
-
-
         res.status(200).send({"message":"login successfully","toekn":token})
               
 } catch (error) {

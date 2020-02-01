@@ -8,6 +8,19 @@ const app=express()
 // the data coming in the request is parsed as json
 app.use(express.json())
 
+//uptill now we have used app.use() for registering default function or router
+// but we can use this to set middle ware
+
+// request ----> middleware -----> router
+
+// app.use((req,res,next)=>
+// {
+// if(req.method=='GET')
+//       res.send('GET requests are blocked')
+
+//       next()
+// })
+
 
 
 // we are importing the router from each file
@@ -33,5 +46,6 @@ const myFun =async()=>
 
     console.log(pass)
     console.log(hashPass)
+
 }
 

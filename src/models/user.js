@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type:String,
+        unique:true,
         required:true,
         validate(value)
         {
@@ -35,6 +36,8 @@ const userSchema = new mongoose.Schema({
             required:true
         }
     }]
+},{
+    timestamps:true
 })
 
 // this are the methods we are applied on the object
@@ -42,8 +45,9 @@ userSchema.methods.tokenGenrator =async function()
 {
 const user = this
 const token = jwt.sign({_id:user._id.toString()},'AnkitaPatil')
+// this is used to add new object in array 
 user.Tokens= user.Tokens.concat({token})
-
+//we are saving new data
 await user.save()
 return token
 }

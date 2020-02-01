@@ -31,7 +31,7 @@ router.get('/task_list',async(req,res)=>
 {
         
         try {
-            const data= await Task.find({})
+            const data= await Task.find({}).sort({"createdAt":1})
             res.send(data)
             console.log(data)
         } catch (e) {
